@@ -1,0 +1,69 @@
+# NEPA-PRO Lawn Care
+
+> Professional lawn care service in Northeast Pennsylvania. Online booking with Stripe — weekly, bi-weekly, monthly, and one-time mowing from $40 per visit. All-electric fleet. Veteran owned. Fully insured.
+
+## What we do
+
+Lawn mowing, edging, line trimming, and blow-off of hard surfaces. Every visit includes all four. We use all-electric EGO equipment — quieter and emission-free.
+
+## Who we are
+
+NEPA-PRO Lawn Care, a NEPA-PRO company. Based in Clarks Summit, PA. U.S. veteran owned and operated. Fully insured for general liability.
+
+## Where we serve
+
+Northeast Pennsylvania. Zip codes starting with 184, 185, 186, 187, 188. Cities include Clarks Summit, Scranton, Dunmore, Dickson City, Olyphant, Throop, Moosic, Old Forge, South Abington Township, Waverly, Dalton, Chinchilla, Glenburn.
+
+## Pricing (per visit, USD)
+
+Recurring lawn care:
+
+| Yard size | Sq ft | Weekly | Bi-Weekly | Monthly | One-Time |
+|---|---|---|---|---|---|
+| Small | <5,000 | $40 | $45 | $55 | $70 |
+| Medium | 5,000–10,000 | $60 | $70 | $85 | $105 |
+| Large | 10,000–20,000 | $85 | $100 | $120 | $145 |
+| XL | 20,000–43,560 | $115 | $130 | $160 | $195 |
+
+Seasonal add-ons (one-time):
+
+| Service | Price |
+|---|---|
+| Spring Cleanup | $295 |
+| Fall Cleanup & Leaf Removal | $295 |
+| Aeration & Overseed Combo | $225 |
+| Hedge & Shrub Trimming (up to 6) | $95 |
+
+## How booking works
+
+1. Visit https://lawncare.nepa-pro.com
+2. Pick a yard size and frequency
+3. Tap "Book →" to complete checkout in Stripe
+4. We schedule the first visit within 5 business days
+
+Subscriptions can be canceled anytime from the Stripe customer portal or by texting 570-677-7971.
+
+## Contact
+
+- Phone / Text: 570-677-7971
+- Email: noel@solarmason.com
+- Hours: Monday–Saturday, 7am–7pm
+- Address: 14012 Orchard Drive, Clarks Summit, PA 18411
+
+## Key pages
+
+- [Home / Book Online](https://lawncare.nepa-pro.com/)
+- [Packages](https://lawncare.nepa-pro.com/#packages)
+- [Add-ons](https://lawncare.nepa-pro.com/#addons)
+- [FAQ](https://lawncare.nepa-pro.com/#faq)
+- [Parent company](https://nepa-pro.com)
+
+## Common questions answered
+
+- **Service area?** Northeast Pennsylvania — Lackawanna County and surrounding NEPA region.
+- **Contract required?** No. Cancel anytime, no penalty.
+- **Rain policy?** Rescheduled to next dry day; missed weeks aren't charged.
+- **Clippings?** Mulched and side-discharged by default. Bagging available for $10–15 extra.
+- **Insurance?** Yes, general liability. COI available on request.
+- **Who shows up?** A consistent small crew assigned to your route.
+- **Do I need to be home?** No.

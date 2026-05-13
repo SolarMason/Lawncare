@@ -1,0 +1,67 @@
+{
+  "name": "NEPA-PRO Lawn Care",
+  "short_name": "NEPA Lawn",
+  "description": "Book professional lawn care online — weekly, bi-weekly, monthly, and one-time. All-electric fleet. Veteran owned. Northeast PA.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["business", "lifestyle", "utilities"],
+  "id": "nepa-pro-lawncare",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse packages",
+      "short_name": "Packages",
+      "description": "Jump straight to lawn care packages and pricing",
+      "url": "/?source=shortcut#packages",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Call NEPA-PRO",
+      "short_name": "Call",
+      "description": "Call us at 570-677-7971",
+      "url": "/?source=shortcut-call",
+      "icons": [{ "src": "/assets/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "NEPA-PRO Lawn Care — book online"
+    }
+  ]
+}
