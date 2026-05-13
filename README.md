@@ -127,7 +127,14 @@ The JSON-LD `Offer` block near the top of `<head>` should also be updated to mat
 - **SEO**: Comprehensive meta tags, canonical, og:*, twitter:*, JSON-LD LocalBusiness + Service + FAQPage, sitemap.xml, robots.txt with all major bots whitelisted, semantic HTML5, alt text everywhere, mobile-first viewport with safe-area handling, fast (single file, inline CSS, no blocking JS).
 - **AI/LLM search**: llms.txt summary, FAQ structured data, plain-language Q&A copy, ClaudeBot/GPTBot/PerplexityBot all explicitly allowed.
 - **PWA**: Standalone display, maskable icons, theme color, shortcuts, install prompt UI, service worker with offline shell, beforeinstallprompt handled.
-- **iOS native feel**: SF Pro font stack (`-apple-system`), backdrop-blur top bar, segmented control for frequency picker, safe-area-inset padding, pill buttons, accordion FAQ, tap haptic-style press states.
+- **iOS native feel (mobile)**: SF Pro font stack (`-apple-system`), backdrop-blur top bar, segmented control for frequency picker, safe-area-inset padding, pill buttons, accordion FAQ, tap haptic-style press states.
+- **Desktop (≥ 1024px)**:
+  - Full nav bar with hover-and-click mega menus
+  - **Packages mega menu** renders the entire 16-cell pricing matrix (Small/Medium/Large/XL × Weekly/Bi-Weekly/Monthly/One-Time). Hover any price row → highlights black, click → instant Stripe checkout. Single source of truth: edit `PACKAGES[]` in the script and the mega menu, mobile cards, and JSON-LD all update.
+  - **Add-ons mega menu** with the 4 seasonal services, descriptions, and direct-book.
+  - **Service Area mega menu** with cities, coverage zips, hours.
+  - Hero splits into 2 columns with a "Quick Pick · Weekly" pricing card on the right (4 sizes, one click to Stripe).
+  - Packages grid goes 2×2, values 3-col, footer 3-col, FAQ 2-col.
 - **Profit**: every pricing cell verified to net ≥$65/hr after overhead (lowest is $70.41/hr — see `PRICING_LOGIC.md`).
 
 ## Customer support flow

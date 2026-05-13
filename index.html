@@ -348,6 +348,10 @@ p { margin: 0 0 var(--gap-md) 0; }
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
   text-align: center; line-height: 1.2;
   user-select: none; -webkit-user-select: none;
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .segmented label { font-size: 11.5px; padding: 8px 2px; letter-spacing: -0.02em; }
 }
 .segmented label:active { transform: scale(0.96); }
 .segmented input:checked + label {
@@ -556,6 +560,455 @@ footer { padding: var(--gap-2xl) 0 calc(var(--gap-2xl) + var(--safe-bottom)); bo
 /* Skip-link for accessibility */
 .skip { position: absolute; left: -9999px; top: 8px; }
 .skip:focus { left: 8px; padding: 8px 12px; background: var(--ink); color: var(--bg); border-radius: 6px; z-index: 1000; }
+
+/* Hide hero aside on mobile by default (overridden inside ≥1024px media query) */
+.hero-aside { display: none; }
+
+/* Desktop nav hidden by default (shown inside ≥1024px media query) */
+.dnav { display: none; }
+
+/* Mega menu base (positioned absolutely from .dnav-item) */
+.mega {
+  position: absolute;
+  top: calc(100% + 2px);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.18), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.985);
+  transform-origin: top center;
+  transition: opacity 0.2s cubic-bezier(0.2, 0, 0.2, 1),
+              transform 0.22s cubic-bezier(0.2, 0.85, 0.4, 1.05);
+  z-index: 60;
+}
+.dnav-item.open .mega {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================================================
+   DESKTOP LAYOUTS (≥ 1024px)
+   ============================================================ */
+@media (min-width: 1024px) {
+
+  /* Hide mobile topbar */
+  .topbar { display: none; }
+
+  /* Show desktop nav */
+  .dnav {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border-hair);
+  }
+
+  .dnav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 40px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    min-height: 64px;
+  }
+
+  .dnav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .dnav-list {
+    display: flex;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+  }
+  .dnav-item {
+    position: relative;
+  }
+  .dnav-trigger,
+  .dnav-list > .dnav-item > a {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    text-decoration: none;
+  }
+  .dnav-trigger:hover,
+  .dnav-list > .dnav-item > a:hover {
+    background: var(--bg-segment);
+  }
+  .dnav-item.open .dnav-trigger {
+    background: var(--bg-segment);
+  }
+  .dnav-trigger:focus-visible,
+  .dnav-list > .dnav-item > a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .dnav-chev {
+    width: 10px;
+    height: 10px;
+    margin-left: 2px;
+    transition: transform 0.2s ease;
+  }
+  .dnav-item.open .dnav-chev { transform: rotate(180deg); }
+
+  .dnav-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-self: end;
+  }
+  .dnav-phone {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .dnav-share {
+    appearance: none;
+    width: 36px; height: 36px;
+    border-radius: var(--r-full);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+  }
+  .dnav-share:hover { background: var(--ink); color: var(--bg); }
+  .dnav-share:active { transform: scale(0.94); }
+  .dnav-share svg { width: 16px; height: 16px; }
+  .dnav-book {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 10px 18px;
+    border-radius: var(--r-full);
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid var(--ink);
+    transition: opacity 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .dnav-book:hover { opacity: 0.88; }
+  .dnav-book:active { transform: scale(0.97); }
+
+  /* ===== Mega menu — Packages (4-column pricing matrix) ===== */
+  .mega-packages {
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px) scale(0.985);
+    width: min(880px, 90vw);
+  }
+  .dnav-item.open .mega-packages {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .mega-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .mega-col {
+    padding: 10px;
+    border-radius: 12px;
+  }
+  .mega-col-head {
+    padding: 0 8px 14px;
+    border-bottom: 1px solid var(--border-hair);
+    margin-bottom: 8px;
+  }
+  .mega-col-name {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.015em;
+    margin-bottom: 2px;
+  }
+  .mega-col-meta {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    line-height: 1.35;
+  }
+  .mega-prices {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .mega-prices a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 9px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.13s ease, color 0.13s ease, transform 0.08s ease;
+  }
+  .mega-prices a:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .mega-prices a:active { transform: scale(0.98); }
+  .mega-price-amount {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .mega-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-hair);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .mega-footer-note { color: var(--ink-muted); }
+  .mega-footer a {
+    font-weight: 600;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+
+  /* ===== Mega menu — Add-ons (single column) ===== */
+  .mega-addons {
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px) scale(0.985);
+    width: min(520px, 90vw);
+  }
+  .dnav-item.open .mega-addons {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .mega-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .mega-list a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.13s, color 0.13s, transform 0.08s;
+  }
+  .mega-list a:hover { background: var(--ink); color: var(--bg); }
+  .mega-list a:active { transform: scale(0.99); }
+  .mega-list-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .mega-list-name { font-weight: 600; font-size: 14px; letter-spacing: -0.015em; }
+  .mega-list-desc { font-size: 12px; line-height: 1.4; opacity: 0.75; }
+  .mega-list-price {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    align-self: center;
+  }
+
+  /* ===== Mega menu — Service Area ===== */
+  .mega-area {
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px) scale(0.985);
+    width: min(560px, 90vw);
+  }
+  .dnav-item.open .mega-area {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .mega-area-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 28px;
+  }
+  .mega-area h4 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+  .mega-area-cities {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .mega-area-cities span {
+    border: 1px solid var(--border-divider);
+    border-radius: var(--r-full);
+    padding: 5px 11px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .mega-area-info p {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ===== Wider page layouts ===== */
+  .wrap { max-width: 1180px; padding: 0 40px; }
+  .wrap-wide { max-width: 1280px; padding: 0 40px; }
+
+  h1 { font-size: clamp(52px, 5.4vw, 76px); letter-spacing: -0.045em; line-height: 1.02; }
+  h2 { font-size: clamp(36px, 3.5vw, 48px); }
+
+  /* Hero — split layout */
+  .hero { padding: 96px 0 56px; }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-aside {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 28px;
+    background: var(--bg);
+  }
+  .hero-aside-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+  .hero-aside-quick {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .hero-aside-quick a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 11px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid var(--border-hair);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.13s, color 0.13s, border-color 0.13s;
+  }
+  .hero-aside-quick a:hover {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .hero-aside-quick .ha-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: var(--r-full);
+    background: var(--bg-segment);
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .hero-aside-quick a:hover .ha-tag {
+    background: rgba(255,255,255,0.18);
+    color: var(--bg);
+  }
+  .hero-aside-quick .ha-price {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    font-size: 15px;
+  }
+  .hero-aside-foot {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* Mobile hero-only wrapper: leave hero-aside hidden in mobile by reusing .desktop-only */
+  .desktop-only { display: block; }
+
+  /* Section padding more generous */
+  section { padding: 88px 0; }
+
+  /* Package grid: 2×2 on desktop (cards are content-heavy) */
+  .package-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Values: 3 columns on desktop */
+  .values { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+  /* Add-ons: 2 columns on desktop */
+  .addon-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* Steps: side by side */
+  .steps { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .step { grid-template-columns: 44px 1fr; }
+
+  /* Share card stays as 2-col, already responsive */
+
+  /* Footer: 3-column */
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .footer-meta { margin-top: 0; }
+
+  /* FAQ: wider, two columns of accordions */
+  .faq {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 56px;
+  }
+  .faq details { padding: 18px 0; }
+
+  /* Slightly larger body type on desktop */
+  body { font-size: 17px; }
+}
+
+/* Backdrop for click-outside on mega menu */
+.mega-backdrop {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 40;
+  display: none;
+}
+.mega-backdrop.active { display: block; }
+
+/* Wide-screen (≥1440px) — even more breathing room */
+@media (min-width: 1440px) {
+  .hero { padding: 120px 0 80px; }
+  section { padding: 112px 0; }
+  h1 { font-size: 84px; }
+}
 </style>
 </head>
 <body>
@@ -586,6 +1039,142 @@ footer { padding: var(--gap-2xl) 0 calc(var(--gap-2xl) + var(--safe-bottom)); bo
   </div>
 </header>
 
+<!-- ============================================================
+     DESKTOP NAV (≥ 1024px) — mega menus with live pricing matrix
+     ============================================================ -->
+<nav class="dnav" aria-label="Main navigation">
+  <div class="dnav-inner">
+
+    <a href="/" class="dnav-brand" aria-label="NEPA-PRO Lawn Care home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6.5" y="3.5" width="1.4" height="9" rx="0.7" fill="#fff"/>
+          <rect x="9.4" y="5" width="1.4" height="7.5" rx="0.7" fill="#fff"/>
+          <rect x="3.6" y="5" width="1.4" height="7.5" rx="0.7" fill="#fff"/>
+          <rect x="2.5" y="13" width="11" height="0.9" rx="0.4" fill="#fff"/>
+        </svg>
+      </span>
+      <span>NEPA-PRO Lawn Care</span>
+    </a>
+
+    <ul class="dnav-list" role="menubar">
+
+      <li class="dnav-item" data-dnav>
+        <button class="dnav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="mega-packages" data-mega-trigger>
+          Packages
+          <svg class="dnav-chev" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mega mega-packages" id="mega-packages" role="menu" aria-label="Lawn care packages and pricing">
+          <!-- Populated by JS from PACKAGES data -->
+        </div>
+      </li>
+
+      <li class="dnav-item" data-dnav>
+        <button class="dnav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="mega-addons" data-mega-trigger>
+          Add-ons
+          <svg class="dnav-chev" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mega mega-addons" id="mega-addons" role="menu" aria-label="Seasonal add-on services">
+          <ul class="mega-list">
+            <li role="none">
+              <a href="https://secure.nepa-pro.com/b/fZucN5gwB3zl3xP9O52cg2Q" role="menuitem" rel="noopener">
+                <div class="mega-list-text">
+                  <span class="mega-list-name">Spring Cleanup</span>
+                  <span class="mega-list-desc">Debris &amp; leaf removal · bed cleanup · edge refresh</span>
+                </div>
+                <span class="mega-list-price">$295</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="https://secure.nepa-pro.com/b/5kQfZh6W1c5R4BT0dv2cg2R" role="menuitem" rel="noopener">
+                <div class="mega-list-text">
+                  <span class="mega-list-name">Fall Cleanup &amp; Leaf Removal</span>
+                  <span class="mega-list-desc">Full leaf removal · final mow · winter prep</span>
+                </div>
+                <span class="mega-list-price">$295</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="https://secure.nepa-pro.com/b/00weVd4NT2vh2tL4tL2cg2S" role="menuitem" rel="noopener">
+                <div class="mega-list-text">
+                  <span class="mega-list-name">Aeration &amp; Overseed Combo</span>
+                  <span class="mega-list-desc">Core aeration · premium overseed · starter fertilizer</span>
+                </div>
+                <span class="mega-list-price">$225</span>
+              </a>
+            </li>
+            <li role="none">
+              <a href="https://secure.nepa-pro.com/b/6oU5kDcgl9XJect8K12cg2T" role="menuitem" rel="noopener">
+                <div class="mega-list-text">
+                  <span class="mega-list-name">Hedge &amp; Shrub Trimming</span>
+                  <span class="mega-list-desc">Shape &amp; trim up to 6 standard hedges or shrubs</span>
+                </div>
+                <span class="mega-list-price">$95</span>
+              </a>
+            </li>
+          </ul>
+          <div class="mega-footer">
+            <span class="mega-footer-note">One-time services · book online</span>
+            <a href="#addons">View all add-ons →</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="dnav-item" data-dnav>
+        <button class="dnav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="mega-area" data-mega-trigger>
+          Service Area
+          <svg class="dnav-chev" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mega mega-area" id="mega-area" role="menu" aria-label="Service area information">
+          <div class="mega-area-grid">
+            <div>
+              <h4>Cities served</h4>
+              <div class="mega-area-cities">
+                <span>Clarks Summit</span>
+                <span>Scranton</span>
+                <span>Dunmore</span>
+                <span>Dickson City</span>
+                <span>Olyphant</span>
+                <span>Throop</span>
+                <span>Moosic</span>
+                <span>Old Forge</span>
+                <span>S. Abington Twp</span>
+                <span>Waverly</span>
+                <span>Dalton</span>
+                <span>Chinchilla</span>
+                <span>Glenburn</span>
+              </div>
+            </div>
+            <div class="mega-area-info">
+              <h4>Coverage</h4>
+              <p>Northeast Pennsylvania.<br>Zip codes <strong>184, 185, 186, 187, 188</strong>.</p>
+              <h4 style="margin-top:18px;">Hours</h4>
+              <p>Monday – Saturday<br>7:00 AM – 7:00 PM</p>
+              <h4 style="margin-top:18px;">Outside this area?</h4>
+              <p><a href="sms:+15706777971" style="color:var(--ink);border-bottom:1px solid var(--ink);">Text your zip →</a></p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="dnav-item">
+        <a href="#faq">FAQ</a>
+      </li>
+    </ul>
+
+    <div class="dnav-cta">
+      <a class="dnav-phone" href="tel:+15706777971">570-677-7971</a>
+      <button class="dnav-share" id="dnavShare" aria-label="Share this page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 4v12"/><path d="M8 8l4-4 4 4"/><path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/>
+        </svg>
+      </button>
+      <a class="dnav-book" href="#packages">Book Now →</a>
+    </div>
+
+  </div>
+</nav>
+
 <main id="main">
 
 <!-- ============================================================
@@ -593,20 +1182,51 @@ footer { padding: var(--gap-2xl) 0 calc(var(--gap-2xl) + var(--safe-bottom)); bo
      ============================================================ -->
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow reveal">Lawn care · Northeast PA</p>
-    <h1 class="reveal">Lawn care,<br>made simple.</h1>
-    <p class="hero-tagline reveal">Pick your size. Pick your schedule. Pay in seconds. We handle the rest.</p>
-    <div class="hero-trust reveal">
-      <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> All-electric fleet</span>
-      <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> Veteran owned</span>
-      <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> Fully insured</span>
-      <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> Cancel anytime</span>
-    </div>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#packages">Browse packages
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      </a>
-      <a class="btn btn-secondary" href="tel:+15706777971">Call 570-677-7971</a>
+    <div class="hero-inner">
+      <div class="hero-main">
+        <p class="eyebrow reveal">Lawn care · Northeast PA</p>
+        <h1 class="reveal">Lawn care,<br>made simple.</h1>
+        <p class="hero-tagline reveal">Pick your size. Pick your schedule. Pay in seconds. We handle the rest.</p>
+        <div class="hero-trust reveal">
+          <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> All-electric fleet</span>
+          <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> Veteran owned</span>
+          <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> Fully insured</span>
+          <span class="trust-pill"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6l3 3 5-6"/></svg> Cancel anytime</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#packages">Browse packages
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          <a class="btn btn-secondary" href="tel:+15706777971">Call 570-677-7971</a>
+        </div>
+      </div>
+
+      <aside class="hero-aside" aria-label="Quick-pick weekly pricing">
+        <div class="hero-aside-eyebrow">Quick pick · Weekly</div>
+        <div class="hero-aside-quick">
+          <a href="https://secure.nepa-pro.com/b/4gM5kD6W1b1N2tLd0h2cg2A" rel="noopener">
+            <span class="ha-tag">SMALL</span>
+            <span>Under 5k sq ft</span>
+            <span class="ha-price">$40/wk</span>
+          </a>
+          <a href="https://secure.nepa-pro.com/b/28E28r6W19XJ8S90dv2cg2E" rel="noopener">
+            <span class="ha-tag">MEDIUM</span>
+            <span>5–10k sq ft</span>
+            <span class="ha-price">$60/wk</span>
+          </a>
+          <a href="https://secure.nepa-pro.com/b/aFafZhfsxedZfgx6BT2cg2I" rel="noopener">
+            <span class="ha-tag">LARGE</span>
+            <span>10–20k sq ft</span>
+            <span class="ha-price">$85/wk</span>
+          </a>
+          <a href="https://secure.nepa-pro.com/b/8x24gza8d8TFc4ld0h2cg2M" rel="noopener">
+            <span class="ha-tag">XL</span>
+            <span>20k+ sq ft</span>
+            <span class="ha-price">$115/wk</span>
+          </a>
+        </div>
+        <div class="hero-aside-foot">Switch to bi-weekly, monthly, or one-time below.</div>
+      </aside>
     </div>
   </div>
 </section>
@@ -762,7 +1382,7 @@ footer { padding: var(--gap-2xl) 0 calc(var(--gap-2xl) + var(--safe-bottom)); bo
 <!-- ============================================================
      SERVICE AREA
      ============================================================ -->
-<section>
+<section id="area">
   <div class="wrap">
     <p class="eyebrow">Coverage</p>
     <h2>Service area</h2>
@@ -789,7 +1409,7 @@ footer { padding: var(--gap-2xl) 0 calc(var(--gap-2xl) + var(--safe-bottom)); bo
 <!-- ============================================================
      FAQ
      ============================================================ -->
-<section>
+<section id="faq">
   <div class="wrap">
     <p class="eyebrow">Answers</p>
     <h2>Frequently asked</h2>
@@ -1079,6 +1699,132 @@ function renderPackages() {
   });
 }
 renderPackages();
+
+/* ============================================================
+   MEGA MENU — render Packages from PACKAGES (single source of truth)
+   ============================================================ */
+function renderMegaPackages() {
+  const mega = document.getElementById('mega-packages');
+  if (!mega) return;
+
+  const FREQ_ORDER = ['weekly', 'biweekly', 'monthly', 'onetime'];
+  const cols = PACKAGES.map(p => `
+    <div class="mega-col" role="none">
+      <div class="mega-col-head">
+        <div class="mega-col-name">${p.name}</div>
+        <div class="mega-col-meta">${p.size}</div>
+      </div>
+      <ul class="mega-prices" role="none">
+        ${FREQ_ORDER.map(freq => `
+          <li role="none">
+            <a href="${p.prices[freq].url}" role="menuitem" rel="noopener" aria-label="Book ${p.name} ${FREQ_LABELS[freq].label} for $${p.prices[freq].amount}">
+              <span>${FREQ_LABELS[freq].label}</span>
+              <span class="mega-price-amount">$${p.prices[freq].amount}</span>
+            </a>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  `).join('');
+
+  mega.innerHTML = `
+    <div class="mega-grid-4">${cols}</div>
+    <div class="mega-footer">
+      <span class="mega-footer-note">Click any price → instant Stripe checkout</span>
+      <a href="#packages">View full package details →</a>
+    </div>
+  `;
+}
+renderMegaPackages();
+
+/* ============================================================
+   MEGA MENU — interactions (hover, click, keyboard, click-outside)
+   ============================================================ */
+(function() {
+  const items = document.querySelectorAll('[data-dnav]');
+  if (!items.length) return;
+
+  let openItem = null;
+  let closeTimer = null;
+  const HOVER_CLOSE_DELAY = 220;
+
+  function open(item) {
+    if (openItem && openItem !== item) close(openItem);
+    item.classList.add('open');
+    const btn = item.querySelector('[data-mega-trigger]');
+    btn?.setAttribute('aria-expanded', 'true');
+    openItem = item;
+    clearTimeout(closeTimer);
+  }
+
+  function close(item) {
+    item.classList.remove('open');
+    const btn = item.querySelector('[data-mega-trigger]');
+    btn?.setAttribute('aria-expanded', 'false');
+    if (openItem === item) openItem = null;
+  }
+
+  function closeAll() {
+    items.forEach(close);
+  }
+
+  items.forEach(item => {
+    const trigger = item.querySelector('[data-mega-trigger]');
+    if (!trigger) return;
+
+    // Click ensures the menu is open (never toggles closed via the trigger itself).
+    // Closing happens via: mouseleave delay, Esc, click-outside, or clicking a menu item.
+    // This avoids the hover+click race where mouseenter fires immediately before click on touch
+    // devices and synthetic clicks, which would otherwise immediately re-close what just opened.
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      open(item);
+    });
+
+    // Hover (desktop only — won't fire on touch)
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(closeTimer);
+      open(item);
+    });
+    item.addEventListener('mouseleave', () => {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => close(item), HOVER_CLOSE_DELAY);
+    });
+
+    // Keyboard: Enter/Space on trigger when already open should close (toggle for a11y)
+    trigger.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && item.classList.contains('open')) {
+        e.preventDefault();
+        close(item);
+      }
+    });
+
+    // Auto-close when a menu link is clicked (so the user goes to checkout cleanly)
+    item.querySelectorAll('a[role="menuitem"], .mega-footer a').forEach(a => {
+      a.addEventListener('click', () => closeAll());
+    });
+  });
+
+  // Click outside closes
+  document.addEventListener('click', (e) => {
+    if (!openItem) return;
+    if (!e.target.closest('[data-dnav]')) closeAll();
+  });
+
+  // Esc closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && openItem) {
+      const trigger = openItem.querySelector('[data-mega-trigger]');
+      closeAll();
+      trigger?.focus();
+    }
+  });
+
+  // Wire desktop share button
+  const dnavShare = document.getElementById('dnavShare');
+  if (dnavShare) dnavShare.addEventListener('click', doShare);
+})();
 
 /* ============================================================
    SHARE — Web Share API + fallbacks
